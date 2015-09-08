@@ -1,0 +1,20 @@
+[
+  {
+    "outputFileName": "site/css/foundation.css",
+    "inputFiles": [
+      "site/css/foundation.css"
+    ]
+  },
+  {
+    "outputFileName": "site/css/normalize.css",
+    "inputFiles": [
+      "site/css/normalize.css"
+    ]
+  },
+  {
+    "outputFileName": "site/css/custom.css",
+    "inputFiles": [
+      "site/css/custom.css"
+    ]
+  }
+]

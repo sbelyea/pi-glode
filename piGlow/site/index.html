@@ -1,0 +1,92 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Light Control</title>
+    <link rel="stylesheet" href="css/normalize.min.css" />
+    <link rel="stylesheet" href="css/foundation.min.css" />
+    <link rel="stylesheet" href="css/custom.min.css" />
+</head>
+<body>
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="panel">
+                <button id="reset" class="button expand alert" onclick="reset()">Turn Off</button><br /><br />
+                <h3>Color Controls</h3>
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="white" class="inline">White:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="range" class="slider" name="white" min="0" max="5" value="0" onchange="slider('white', this.value)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="blue" class="inline">Blue:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="range" class="slider" name="blue" min="0" max="5" value="0" onchange="slider('blue', this.value)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="green" class="inline">Green:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="range" class="slider" name="green" min="0" max="5" value="0" onchange="slider('green', this.value)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="white" class="inline">Yellow:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="range" class="slider" name="yellow" min="0" max="5" value="0" onchange="slider('yellow', this.value)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="white" class="inline">Orange:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="range" class="slider" name="orange" min="0" max="5" value="0" onchange="slider('orange', this.value)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="white" class="inline">Red:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="range" class="slider" name="red" min="0" max="5" value="0" onchange="slider('red', this.value)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        var resetURL = "/api/v2.0.0/reset";
+        var fullURL;
+        var newURL = "/api/v2.0.0/light?"
+	var sliders = document.getElementsByClassName("slider");
+
+        function reset () {
+		for (i = 0; i < sliders.length; i++){
+			sliders[i].value="0"
+		}
+	        xmlhttp.open("GET", resetURL);
+	        xmlhttp.send();
+        };
+
+        function slider (color, level) {
+	        fullURL = "";
+	        fullURL = newURL + "color=" + color + "&level=" + (level * 51);
+	        xmlhttp.open("GET", fullURL);
+	        xmlhttp.send();
+        };
+    </script>
+
+</body>
+</html>
