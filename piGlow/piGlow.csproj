@@ -69,7 +69,12 @@
     <Content Include="node\piglow_server.js" />
     <Content Include="packages.config" />
     <None Include="bundleconfig.json" />
+    <Content Include="site\fonts\icomoon.svg" />
+    <Content Include="site\js\control.js" />
     <Content Include="site\status.json" />
+    <Content Include="site\fonts\icomoon.eot" />
+    <Content Include="site\fonts\icomoon.ttf" />
+    <Content Include="site\fonts\icomoon.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -96,9 +101,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="site\js\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
