@@ -66,8 +66,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="node\piglow_server.js" />
     <Content Include="packages.config" />
     <None Include="bundleconfig.json" />
+    <Content Include="site\status.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -19,7 +19,7 @@
                         <label for="white" class="inline">White:</label>
                     </div>
                     <div class="small-9 columns">
-                        <input type="range" class="slider" name="white" min="0" max="5" value="0" onchange="slider('white', this.value)">
+                        <input id ="color-white" type="range" class="slider" name="white" min="0" max="5" value="0" onchange="slider('white', this.value)">
                     </div>
                 </div>
                 <div class="row">
@@ -27,7 +27,7 @@
                         <label for="blue" class="inline">Blue:</label>
                     </div>
                     <div class="small-9 columns">
-                        <input type="range" class="slider" name="blue" min="0" max="5" value="0" onchange="slider('blue', this.value)">
+                        <input id ="color-blue" type="range" class="slider" name="blue" min="0" max="5" value="0" onchange="slider('blue', this.value)">
                     </div>
                 </div>
                 <div class="row">
@@ -35,31 +35,31 @@
                         <label for="green" class="inline">Green:</label>
                     </div>
                     <div class="small-9 columns">
-                        <input type="range" class="slider" name="green" min="0" max="5" value="0" onchange="slider('green', this.value)">
+                        <input id ="color-green" type="range" class="slider" name="green" min="0" max="5" value="0" onchange="slider('green', this.value)">
                     </div>
                 </div>
                 <div class="row">
                     <div class="small-3 columns">
-                        <label for="white" class="inline">Yellow:</label>
+                        <label for="yellow" class="inline">Yellow:</label>
                     </div>
                     <div class="small-9 columns">
-                        <input type="range" class="slider" name="yellow" min="0" max="5" value="0" onchange="slider('yellow', this.value)">
+                        <input id ="color-yellow" type="range" class="slider" name="yellow" min="0" max="5" value="0" onchange="slider('yellow', this.value)">
                     </div>
                 </div>
                 <div class="row">
                     <div class="small-3 columns">
-                        <label for="white" class="inline">Orange:</label>
+                        <label for="orange" class="inline">Orange:</label>
                     </div>
                     <div class="small-9 columns">
-                        <input type="range" class="slider" name="orange" min="0" max="5" value="0" onchange="slider('orange', this.value)">
+                        <input id ="color-orange" type="range" class="slider" name="orange" min="0" max="5" value="0" onchange="slider('orange', this.value)">
                     </div>
                 </div>
                 <div class="row">
                     <div class="small-3 columns">
-                        <label for="white" class="inline">Red:</label>
+                        <label for="red" class="inline">Red:</label>
                     </div>
                     <div class="small-9 columns">
-                        <input type="range" class="slider" name="red" min="0" max="5" value="0" onchange="slider('red', this.value)">
+                        <input id ="color-red" type="range" class="slider" name="red" min="0" max="5" value="0" onchange="slider('red', this.value)">
                     </div>
                 </div>
             </div>
@@ -67,10 +67,11 @@
     </div>
     <script>
         var xmlhttp = new XMLHttpRequest();
-        var resetURL = "/api/v2.0.0/reset";
+        var resetURL = "/api/v2.0.1/reset";
         var fullURL;
-        var newURL = "/api/v2.0.0/light?"
-	var sliders = document.getElementsByClassName("slider");
+        var newURL = "/api/v2.0.1/light?"
+        var sliders = document.getElementsByClassName("slider");
+        var glow = {};
 
         function reset () {
 		for (i = 0; i < sliders.length; i++){
@@ -86,6 +87,29 @@
 	        xmlhttp.open("GET", fullURL);
 	        xmlhttp.send();
         };
+
+        function getJSON(callback) {
+            xmlhttp.open("GET", "/api/v2.0.1/status", true);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == "200") {
+                    callback(xmlhttp.responseText);
+                }
+            };
+            xmlhttp.send();
+        }
+
+        function processStatus(payload) {
+            glow = JSON.parse(payload);
+            updateStatus();
+        }
+
+        function updateStatus() {
+            for (i = 0; i < (glow.length / 3) ; i++) {
+                document.getElementById("color-" + glow[i].color).value = (glow[i].level / 51);
+            }
+        }
+
+        getJSON(processStatus);
     </script>
 
 </body>
