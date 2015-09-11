@@ -66,12 +66,13 @@
         </div>
     </div>
     <script>
-        var xmlhttp = new XMLHttpRequest();
-        var resetURL = "/api/v2.0.1/reset";
+        var api = "/api/v2.0.1/";        
+        var resetURL = api + "reset";        
+        var newURL = api + "light?"        
         var fullURL;
-        var newURL = "/api/v2.0.1/light?"
-        var sliders = document.getElementsByClassName("slider");
         var glow = {};
+        var sliders = document.getElementsByClassName("slider");
+        var xmlhttp = new XMLHttpRequest();
 
         function reset () {
 		for (i = 0; i < sliders.length; i++){
@@ -96,18 +97,18 @@
                 }
             };
             xmlhttp.send();
-        }
+        };
 
         function processStatus(payload) {
             glow = JSON.parse(payload);
             updateStatus();
-        }
+        };
 
         function updateStatus() {
             for (i = 0; i < (glow.length / 3) ; i++) {
                 document.getElementById("color-" + glow[i].color).value = (glow[i].level / 51);
             }
-        }
+        };
 
         getJSON(processStatus);
     </script>
